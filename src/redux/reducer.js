@@ -9,6 +9,6 @@ export const toursReducer = createReducer(initialState, (builder) => {
       state.push(action.payload);
     })
     .addCase(Types.DELETE_CONTACT, (state, action) => {
-      state.filter((tour) => tour.id !== action.payload);
+      state.filter((contact) => contact.id !== action.payload);
     });
 });

@@ -2,8 +2,10 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useId } from "react";
 import css from "../ContactForm/ContactForm.module.css";
+import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/contactsSlice";
 
-const ContactForm = ({ onAdd }) => {
+const ContactForm = () => {
   const initialValues = {
     name: "",
     number: "",
@@ -25,15 +27,16 @@ const ContactForm = ({ onAdd }) => {
       .required("Required"),
   });
 
-  const handleSumbmit = (values, actions) => {
-    onAdd(values);
-    actions.resetForm();
+  const dispatch = useDispatch();
+
+  const handleSubmit = (values) => {
+    dispatch(addContact({ values }));
   };
 
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={handleSumbmit}
+      onSubmit={handleSubmit}
       validationSchema={FeedbackSchema}
     >
       <Form className={css.containerBook}>
@@ -50,7 +53,7 @@ const ContactForm = ({ onAdd }) => {
         <div>
           <label htmlFor={numberId}>number</label>
           <Field
-            type="number"
+            type="text"
             name="number"
             id={numberId}
             className={css.field}
