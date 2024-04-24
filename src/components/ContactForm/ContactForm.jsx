@@ -4,7 +4,6 @@ import { useId } from "react";
 import css from "../ContactForm/ContactForm.module.css";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contactsSlice";
-import { nanoid } from "nanoid";
 
 const ContactForm = () => {
   const initialValues = {
@@ -31,13 +30,7 @@ const ContactForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
-    const newContact = {
-      ...values,
-      id: nanoid(),
-      name: values.name.trim(),
-    };
-
-    dispatch(addContact({ newContact }));
+    dispatch(addContact(values));
     actions.resetForm();
   };
 
@@ -60,12 +53,7 @@ const ContactForm = () => {
         </div>
         <div>
           <label htmlFor={numberId}>number</label>
-          <Field
-            type="text"
-            name="number"
-            id={numberId}
-            className={css.field}
-          />
+          <Field type="tel" name="number" id={numberId} className={css.field} />
           <ErrorMessage
             name="number"
             component="span"

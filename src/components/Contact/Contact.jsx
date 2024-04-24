@@ -20,7 +20,7 @@ const Contact = ({ contact }) => {
         </p>
         <p className={css.userdata}>
           <FaPhoneAlt />
-          {contact.phoneNumber}
+          {contact.number}
         </p>
       </li>
       <button className={css.btn} type="button" onClick={handleDelete}>
